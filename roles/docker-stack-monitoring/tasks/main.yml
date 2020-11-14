@@ -1,5 +1,5 @@
-- name: Deploy Prometheus Configuration
-  copy:
+- name: Deploy Templated Prometheus Configuration
+  template:
     src: prometheus/prometheus.yml
     dest: /share/data/prometheus/prometheus.yml
     mode: 666

@@ -87,6 +87,7 @@ noip_username: my noip username
 noip_password: my noip password
 external_url: my domain as registered with noip
 grafana_admin_password: my admin password for Grafana
+homeassistant_token: my [long lived access token](https://www.home-assistant.io/docs/authentication/) from HomeAssistant used for Prometheus scraping of HomeAssistant data
 ```
 
 #### docker-stack-monitoring/files/prometheus/private

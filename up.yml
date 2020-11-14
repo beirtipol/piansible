@@ -1,47 +1,47 @@
 ---
 
-# - name: Set up basic Installation and Docker
-#   hosts: all_hosts
-#   user: pi
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - common
-#     - common-networking
-#     - docker-install
+- name: Set up basic Installation and Docker
+  hosts: all_hosts
+  user: pi
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - common
+    - common-networking
+    - docker-install
 
-# - name: Set up Docker Swarm Managers
-#   hosts: swarm_manager
-#   user: pi
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - nfs-master
-#     - docker-swarm-init
+- name: Set up Docker Swarm Managers
+  hosts: swarm_manager
+  user: pi
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - nfs-master
+    - docker-swarm-init
 
-# - name: Set up Docker Swarm Workers
-#   hosts: swarm_workers
-#   user: pi
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - nfs-client
-#     - docker-swarm-add-worker
+- name: Set up Docker Swarm Workers
+  hosts: swarm_workers
+  user: pi
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - nfs-client
+    - docker-swarm-add-worker
 
-# - name: Deploy Docker Stacks
-#   hosts: swarm_manager
-#   user: pi
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - docker-stack-portainer
-#     - docker-stack-monitoring
-#     - docker-stack-jfixtools
-#     - docker-stack-nginx
+- name: Deploy Docker Stacks
+  hosts: swarm_manager
+  user: pi
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - docker-stack-portainer
+    - docker-stack-monitoring
+    - docker-stack-jfixtools
+    - docker-stack-nginx
 
 - name: Set up NOIP DUC
   hosts: swarm_manager

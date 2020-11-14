@@ -85,3 +85,11 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: prometheus-blackbox:9115
+
+  - job_name: 'home-assistant'
+    metrics_path: /api/prometheus
+    scheme: http
+    bearer_token: {{homeassistant_access_token}}
+    static_configs:
+    - targets: ['homeassistant:8123']
+      
