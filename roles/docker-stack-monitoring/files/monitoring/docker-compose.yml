@@ -1,0 +1,156 @@
+version: '3'
+
+# Define any volumes where we want persistent storage.
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
+services:
+  # Prometheus is the Time-series database and aggregation tool for metrics
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    depends_on:
+      - cadvisor
+      - node-exporter
+      - arm-exporter
+      - prometheus-pushgateway
+      - ping-exporter
+      - prometheus-blackbox
+    networks:
+      - back-tier
+    volumes:
+      - /share/data/prometheus/:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.enable-admin-api'
+      - '--web.enable-lifecycle'
+    deploy:
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+  # A network stats gathering probe for Prometheus
+  prometheus-blackbox:
+    image: prom/blackbox-exporter
+    ports:
+      - 9115:9115
+    networks:
+      - back-tier
+    deploy:
+      mode: global
+
+  # A tool for pushing metrics in to Prometheus
+  prometheus-pushgateway:
+    image: prom/pushgateway
+    ports:
+      - 9091:9091
+    networks:
+      - back-tier
+    deploy:
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+  # Node Exporter is the default metrics gathering tool for Prometheus
+  # extends the default one to provide the 'node id' and 'node name' mapping for prometheus
+  node-exporter:
+    image: beirtipol/node-exporter:v1.0.1
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /etc/hostname:/etc/nodename
+    environment:
+      - NODE_ID={{.Node.ID}}
+    command: 
+      - '--path.procfs=/host/proc' 
+      - '--path.sysfs=/host/sys'
+      - '--collector.textfile.directory=/etc/node-exporter/'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--no-collector.ipvs'
+    ports:
+      - 9100:9100
+    networks:
+      - back-tier
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+      restart_policy:
+          condition: on-failure
+
+  # Arm Exporter is specifically for extracting Raspberry Pi CPU/GPU temperature stats
+  arm-exporter:
+    image: carlosedp/arm_exporter
+    ports:
+      - 9243:9243
+    environment:
+      - NODE_ID={{.Node.ID}}
+    volumes:
+      - /etc/hostname:/etc/nodename:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/TZ:ro
+    command:
+      - '--collector.textfile.directory=/etc/rpi_exporter/'
+    networks:
+      - back-tier
+    deploy:
+      mode: global
+      restart_policy:
+          condition: on-failure
+
+  # CAdvisor is a monitoring tool for docker swarm nodes.
+  cadvisor:
+    image: braingamer/cadvisor-arm:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    command: -logtostderr -docker_only
+    ports:
+      - 8888:8080
+    networks:
+      - back-tier
+    deploy:
+      mode: global
+      restart_policy:
+          condition: on-failure
+
+  # Grafana is a visualisation tool that can use Prometheus and other datasources for viewing metrics
+  grafana:
+    image: grafana/grafana:7.0.5
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - /share/data/grafana/provisioning/:/etc/grafana/provisioning/
+      - /share/data/grafana/grafana.ini:/etc/grafana/grafana.ini
+    env_file:
+      - /share/data/grafana/config.monitoring
+    user: "472"
+    networks:
+      - back-tier
+      - front-tier
+    deploy:
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure

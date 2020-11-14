@@ -1,0 +1,15 @@
+version: '3'
+
+networks:
+  jfixtools:
+
+services:
+  jfixtools:
+    image: beirtipol/jfixtools:1.0-BETA
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - 8080:8080
+    networks:
+      - jfixtools

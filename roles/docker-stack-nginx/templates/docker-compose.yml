@@ -1,0 +1,37 @@
+version: '3'
+
+volumes:
+  nginx_data: {}
+
+services:
+  nginx:
+    image: linuxserver/letsencrypt
+    volumes:
+      - nginx_data:/config
+      - /share/data/nginx/proxy-confs/:/config/nginx/proxy-confs/
+      - /share/data/nginx/dhparams.pem:/config/nginx/dhparams.pem
+    deploy:
+      mode: replicated
+      placement:
+        constraints:
+          - "node.role==manager"
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - URL={{external_url}}
+      - SUBDOMAINS=www,grafana,home,fix
+      - VALIDATION=http
+      - EMAIL={{my_email}}
+      - TZ=Europe/London
+    networks:
+      - monitoring_front-tier
+      - jfixtools_jfixtools
+
+networks:
+  monitoring_front-tier:
+    external: true
+  jfixtools_jfixtools:
+    external: true

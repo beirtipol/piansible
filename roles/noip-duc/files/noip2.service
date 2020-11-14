@@ -1,0 +1,9 @@
+[Unit]
+Description=NOIP2 Service
+
+[Service]
+ExecStart=/usr/local/bin/noip2
+User=root
+
+[Install]
+WantedBy=multi-user.target

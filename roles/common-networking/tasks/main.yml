@@ -1,0 +1,25 @@
+---
+
+- name: 'Set Hostname'
+  hostname: name={{ new_hostname }}
+
+- name: 'Add Hostname to /etc/hosts'
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    regexp: '^127.0.1.1.*'
+    line: "127.0.1.1 {{ new_hostname }}"
+
+- name: Ensure ssh host key known
+  delegate_to: localhost
+  lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + item) }}"
+    with_items: "{{ groups['all_hosts'] }}"
+
+- name: 'Reboot'
+  become: yes
+  reboot:

@@ -1,0 +1,49 @@
+- name: Deploy Prometheus Configuration
+  copy:
+    src: prometheus/prometheus.yml
+    dest: /share/data/prometheus/prometheus.yml
+    mode: 666
+
+- name: Deploy public Prometheus Configuration
+  copy:
+    src: prometheus/public
+    dest: /share/data/prometheus
+    mode: 666
+
+- name: Deploy private Prometheus Configuration
+  copy:
+    src: prometheus/private
+    dest: /share/data/prometheus
+    mode: 666
+    decrypt: yes
+
+- name: Deploy Grafana Configuration and Provisioning
+  copy:
+    src: grafana
+    dest: /share/data/grafana
+    mode: 666
+
+- name: Deploy Templated Grafana Config file
+  template:
+    src: grafana/config.monitoring
+    dest: /share/data/grafana/config.monitoring
+    mode: 666
+
+- name: Deploy Node Exporter Configuration
+  copy:
+    src: node-exporter
+    dest: /share/data/node-exporter
+    mode: 666
+
+- name: Deploy Docker Compose file
+  copy:
+    src: monitoring
+    dest: /share/config/monitoring
+    mode: 666
+
+- name: Deploy monitoring stack
+  docker_stack:
+    state: present
+    name: monitoring
+    compose: 
+      - /share/config/monitoring/docker-compose.yml

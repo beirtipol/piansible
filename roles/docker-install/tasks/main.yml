@@ -1,0 +1,50 @@
+---
+- name: 'Remove existing Docker'
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    pkg:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+
+- name: 'Add Docker Key'
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/raspbian/gpg
+    state: present
+
+- name: 'Add Docker Repository'
+  become: yes
+  apt_repository:
+    repo: deb https://download.docker.com/linux/raspbian buster stable
+    state: present
+
+- name: 'Install Docker Packages'
+  become: yes
+  apt:
+    update_cache: yes
+    pkg:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+
+- name: 'Install pip packages for docker-compose'
+  become: yes
+  pip:
+    name: 
+    - jsondiff
+    - pyyaml
+
+- name: 'Add my user to Docker group'
+  become: yes
+  user:
+    name: "{{ new_user }}"
+    group: docker
+
+- name: 'Copy daemon.json file'
+  become: yes
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json

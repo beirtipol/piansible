@@ -1,0 +1,33 @@
+all:
+  hosts:
+    pinode01:
+      new_hostname: pinode01
+      ansible_host: 192.168.86.10
+    pinode02:
+      new_hostname: pinode02
+      ansible_host: 192.168.86.11
+    pinode03:
+      new_hostname: pinode03
+      ansible_host: 192.168.86.12
+  children:
+    all_hosts:
+      hosts:
+        pinode01:
+        pinode02:
+        pinode03:
+    swarm_manager:
+      hosts:
+        pinode01:
+    swarm_workers:
+      hosts:
+        pinode02:
+        pinode03:
+  vars:
+    router_ip: 192.168.86.1
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_user: pi
+    ansible_password: raspberry
+    remote_user: pi
+    # Sourced from vault variables
+    new_user: "{{my_user}}"
+    new_user_pass: "{{my_pass}}"

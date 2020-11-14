@@ -1,0 +1,21 @@
+[
+    {
+        "id": 1,
+        "uid": "fAFlD6zRk",
+        "name": "Discord",
+        "type": "discord",
+        "isDefault": true,
+        "sendReminder": false,
+        "disableResolveMessage": false,
+        "frequency": "",
+        "created": "2020-10-30T10:41:25Z",
+        "updated": "2020-10-30T10:41:25Z",
+        "settings": {
+            "autoResolve": true,
+            "httpMethod": "POST",
+            "severity": "critical",
+            "uploadImage": true,
+            "url": "https://discord.com/api/webhooks/735933861455986809/iBg42cav-3-HhLvsnzaC-g88LRJyBL7bMEJ15wvkOIDNjh7inREhlyzEnlCHkjAqpLNV"
+        }
+    }
+]

@@ -1,0 +1,13 @@
+- name: Create share directory if it does not exist
+  file:
+    path: /share
+    state: directory
+    mode: '0777'
+
+- name: Mount NFS Master Share
+  mount:
+    path: /share
+    src: "{{hostvars['pinode01']['ansible_default_ipv4']['address']}}:/share"
+    fstype: nfs
+    opts: rw
+    state: mounted

@@ -1,0 +1,66 @@
+---
+- name: 'Update and upgrade apt packages'
+  become: yes
+  apt:
+    upgrade: "yes"
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: 'Install packages'
+  become: yes
+  apt:
+    pkg:
+      - python3-pip
+      - git
+      - apt-transport-https
+      - ca-certificates
+      - curl 
+      - gnupg-agent
+      - software-properties-common
+      - nfs-common
+
+- name: 'Create my user'
+  become: yes
+  user:
+    name: "{{ new_user }}"
+    password: "{{ new_user_pass }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: 'Add my user to sudoers'
+  become: yes
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^{{ new_user }}'
+    line: "{{ new_user }} ALL=(ALL) NOPASSWD: ALL"
+
+- name: 'Enable 64bit Arm, GPU Mem and Smoother fan speeds for POE'
+  become: yes
+  blockinfile:
+    path: /boot/config.txt
+    block: |
+      # Enable GPU memory and 64bit Arm
+      gpu_mem_16=1
+      arm_64bit=1
+
+      # Smoother Fan Speeds for POE Hat
+      dtoverlay=rpi-poe
+      dtparam=poe_fan_temp0=10000,poe_fan_temp0_hyst=1000
+      dtparam=poe_fan_temp1=55000,poe_fan_temp1_hyst=5000
+      dtparam=poe_fan_temp2=60000,poe_fan_temp2_hyst=5000
+      dtparam=poe_fan_temp3=65000,poe_fan_temp3_hyst=5000
+      dtparam=eee=off
+
+- name: 'Enable CGroup cpu / memory for CAdvisor gathering'
+  become: yes
+  lineinfile:
+    path: /boot/cmdline.txt
+    regexp: '^(.*?rootwait)$'
+    backrefs: yes
+    line: '\1 cgroup_enable=cpuset cgroup_enable=memory'
+    
+- name: 'Reboot'
+  become: yes
+  reboot:

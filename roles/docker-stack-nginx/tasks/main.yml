@@ -1,0 +1,18 @@
+- name: Deploy NGINX Data
+  copy:
+    src: data
+    dest: /share/data/nginx
+    mode: 666
+
+- name: Deploy Docker Compose file
+  template:
+    src: docker-compose.yml
+    dest: /share/config/nginx/docker-compose.yml
+    mode: 666
+
+- name: Deploy NGINX stack
+  docker_stack:
+    state: present
+    name: nginx
+    compose: 
+      - /share/config/nginx/docker-compose.yml

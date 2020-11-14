@@ -1,0 +1,12 @@
+- name: Deploy Docker Compose file
+  copy:
+    src: jfixtools
+    dest: /share/config/jfixtools 
+    mode: 666
+
+- name: Deploy JFixTools stack
+  docker_stack:
+    state: present
+    name: jfixtools
+    compose: 
+      - /share/config/jfixtools/docker-compose.yml

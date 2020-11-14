@@ -1,0 +1,21 @@
+- name: 'Install NFS Server packages'
+  become: yes
+  apt:
+    pkg:
+      - nfs-kernel-server
+
+- name: Create share directory if it does not exist
+  file:
+    path: /share
+    state: directory
+    mode: '0777'
+
+- name: Export share
+  lineinfile:
+    path: /etc/exports
+    regexp: '^/share'
+    line: /share *(rw,sync,no_root_squash,no_subtree_check)
+
+- name: 'Reboot'
+  become: yes
+  reboot:
