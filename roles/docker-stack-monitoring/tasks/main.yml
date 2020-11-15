@@ -20,7 +20,7 @@
 - name: Deploy Grafana Configuration and Provisioning
   copy:
     src: grafana
-    dest: /share/data/grafana
+    dest: /share/data
     mode: 666
 
 - name: Deploy Templated Grafana Config file
