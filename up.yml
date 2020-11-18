@@ -11,6 +11,15 @@
     - common-networking
     - docker-install
 
+- name: Apply DHClient workaround
+  hosts: all_hosts
+  user: pi
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - dhclient-workaround
+
 - name: Set up Docker Swarm Managers
   hosts: swarm_manager
   user: pi
