@@ -31,9 +31,12 @@ Here's what it does (in about 10 minutes without any user interaction needed!!!)
     - This is one of my personal applications, run with Spring Boot. I've left it in here as an example for how you can host your own application locally. Assuming you don't want it, you can simply remove it from the Nginx [docker-compose.yml](./docker-stack-nginx/templates/docker-compose.yml) as well as the [subdomain file](./docker-stack-nginx/files/data/proxy-confs/fix.subdomain.conf) and the reference in the [up.yml](./up.yml). Then you can remove the directory for [docker-stack-jfixtools](./docker-stack-jfixtools)
 
 ## Pre-Requisites
-* Windows 10 WSL 2 (for running Ansible, but you can alternatively run from a linux host)
-    * Ubuntu for WSL
-* Ansible Community.General
+* An Ansible environment. You have a choice of:
+    * (Easy) Docker Desktop 
+    * A Linux Environment
+    * Windows 10 WSL 2 (for running Ansible, but you can alternatively run from a linux host)
+        * Ubuntu for WSL
+    * Ansible Community.General (If not taking the easy route)
 * 2 or more Raspberry Pis
 * Repeat for each Pi
     * Flash your Raspberry Pi SDCards with the latest Raspbian Lite OS
@@ -42,8 +45,22 @@ Here's what it does (in about 10 minutes without any user interaction needed!!!)
     * Follow the instructions for your router to discover the new Pi and assign it a static IP. Note down the static IP that you choose.
 * For Nginx LetsEncrypt, you will need a [NoIP](https://www.noip.com/) account (Free is fine)
 
+## Pi Setup
+I have set up my Pi's with the standard RAspbian install by using the RaspberryPi Imager, available [here](https://www.raspberrypi.org/software/).
+
+## Docker Desktop
+The Dockerfile in this project builds a simple Ubuntu image with the relevant dependencies installed. You only need to build it once with
+
+`buildDockerContainer.bat`
+
+And then you can start a shell at any point with 
+
+`startDockerContainer.bat`
+
+From there, you can run any ansible commands, including encrypting and decrypting your vault files.
+
 ## Ansible Installation
-You should refer to the latest documentation on installing [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+If you can't use or don't want to use Docker to install docker (it is a bit meta I guess) then you should refer to the latest documentation on installing [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 Assuming you have installed an Ubuntu WSL environment, you can follow the default Ansible Installation instructions for [Ubuntu](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
 

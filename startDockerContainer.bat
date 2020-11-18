@@ -1,0 +1,1 @@
+docker run -w /ansible -it -v %cd%:/ansible piansible:latest /bin/bash
