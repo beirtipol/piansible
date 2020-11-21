@@ -1,10 +1,15 @@
 ---
-
+- name: Deploy DHClient renewal script
+  copy:
+    src: checkAndRenewIPAddress.sh
+    dest: /usr/local/bin/checkAndRenewIPAddress.sh
+    mode: 777
 # There is some weird issue when running Docker Swarm nodes on a RaspberryPi
 # The IPv4 address seems to "disappear" every 24 hours or so. It can be restored with this command
-- name: Set up nightly manual DHClient renewal
+# See more reports here: https://bugs.launchpad.net/ubuntu/+source/avahi/+bug/1586528
+- name: Set up DHClient renewal to run every minute
   become: yes
   cron:
     name: "Renew eth0 IPv4 address"
-    hour: "0"
-    job: "dhclient -r eth0 && dhclient eth0"
+    minute: "*"
+    job: "/usr/local/bin/checkAndRenewIPAddress.sh"
