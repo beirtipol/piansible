@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1602172491684,
+  "iteration": 1612874256756,
   "links": [],
   "panels": [
     {
@@ -98,7 +98,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -166,7 +166,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -235,18 +235,418 @@
       }
     },
     {
-      "collapsed": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 1,
-        "w": 24,
+        "h": 7,
+        "w": 9,
         "x": 0,
         "y": 8
       },
-      "id": 27,
+      "id": 55,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Amazon",
+          "value": "Amazon"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 54,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Amazon",
+          "value": "Amazon"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 15
+      },
+      "id": 101,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Amazon",
+          "value": "Amazon"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 15
+      },
+      "hiddenSeries": false,
+      "id": 102,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Amazon",
+          "value": "Amazon"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "Round Trip {{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 103,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -291,9 +691,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 9
+        "y": 23
       },
-      "id": 28,
+      "id": 104,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -307,7 +707,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -319,7 +719,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -349,10 +749,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 9
+        "y": 23
       },
       "hiddenSeries": false,
-      "id": 29,
+      "id": 105,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -374,7 +774,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -390,7 +790,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -459,18 +859,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 30
+      },
+      "id": 106,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueCrest",
+          "value": "BlueCrest"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 30
+      },
+      "hiddenSeries": false,
+      "id": 107,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueCrest",
+          "value": "BlueCrest"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 37
+      },
+      "id": 108,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueCrest",
+          "value": "BlueCrest"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 37
+      },
+      "hiddenSeries": false,
+      "id": 109,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueCrest",
+          "value": "BlueCrest"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 44
       },
-      "id": 30,
+      "id": 110,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -515,9 +1327,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 17
+        "y": 45
       },
-      "id": 31,
+      "id": 111,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -531,7 +1343,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -543,7 +1355,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -573,10 +1385,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 17
+        "y": 45
       },
       "hiddenSeries": false,
-      "id": 32,
+      "id": 112,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -598,7 +1410,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -614,7 +1426,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -683,18 +1495,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 52
+      },
+      "id": 113,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueJeans",
+          "value": "BlueJeans"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 52
+      },
+      "hiddenSeries": false,
+      "id": 114,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueJeans",
+          "value": "BlueJeans"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 59
+      },
+      "id": 115,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueJeans",
+          "value": "BlueJeans"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 59
+      },
+      "hiddenSeries": false,
+      "id": 116,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "BlueJeans",
+          "value": "BlueJeans"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 66
       },
-      "id": 33,
+      "id": 117,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -739,9 +1963,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 25
+        "y": 67
       },
-      "id": 34,
+      "id": 118,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -755,7 +1979,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -767,7 +1991,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -797,10 +2021,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 25
+        "y": 67
       },
       "hiddenSeries": false,
-      "id": 35,
+      "id": 119,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -822,7 +2046,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -838,7 +2062,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -907,18 +2131,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 74
+      },
+      "id": 120,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Google",
+          "value": "Google"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 74
+      },
+      "hiddenSeries": false,
+      "id": 121,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Google",
+          "value": "Google"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 81
+      },
+      "id": 122,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Google",
+          "value": "Google"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 81
+      },
+      "hiddenSeries": false,
+      "id": 123,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Google",
+          "value": "Google"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 88
       },
-      "id": 36,
+      "id": 124,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -963,9 +2599,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 33
+        "y": 89
       },
-      "id": 37,
+      "id": 125,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -979,7 +2615,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -991,7 +2627,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -1021,10 +2657,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 33
+        "y": 89
       },
       "hiddenSeries": false,
-      "id": 38,
+      "id": 126,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1046,7 +2682,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1062,7 +2698,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -1131,18 +2767,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 96
+      },
+      "id": 127,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "LittleTiger",
+          "value": "LittleTiger"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 96
+      },
+      "hiddenSeries": false,
+      "id": 128,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "LittleTiger",
+          "value": "LittleTiger"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 103
+      },
+      "id": 129,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "LittleTiger",
+          "value": "LittleTiger"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 103
+      },
+      "hiddenSeries": false,
+      "id": 130,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "LittleTiger",
+          "value": "LittleTiger"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 110
       },
-      "id": 39,
+      "id": 131,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -1187,9 +3235,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 41
+        "y": 111
       },
-      "id": 40,
+      "id": 132,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -1203,7 +3251,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1215,7 +3263,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -1245,10 +3293,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 41
+        "y": 111
       },
       "hiddenSeries": false,
-      "id": 41,
+      "id": 133,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1270,7 +3318,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1286,7 +3334,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -1355,18 +3403,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 118
+      },
+      "id": 134,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Netflix",
+          "value": "Netflix"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 118
+      },
+      "hiddenSeries": false,
+      "id": 135,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Netflix",
+          "value": "Netflix"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 125
+      },
+      "id": 136,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Netflix",
+          "value": "Netflix"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 125
+      },
+      "hiddenSeries": false,
+      "id": 137,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Netflix",
+          "value": "Netflix"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 132
       },
-      "id": 42,
+      "id": 138,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -1411,9 +3871,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 49
+        "y": 133
       },
-      "id": 43,
+      "id": 139,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -1427,7 +3887,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1439,7 +3899,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -1469,10 +3929,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 49
+        "y": 133
       },
       "hiddenSeries": false,
-      "id": 44,
+      "id": 140,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1494,7 +3954,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1510,7 +3970,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -1579,18 +4039,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 140
+      },
+      "id": 141,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Skype",
+          "value": "Skype"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 140
+      },
+      "hiddenSeries": false,
+      "id": 142,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Skype",
+          "value": "Skype"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 147
+      },
+      "id": 143,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Skype",
+          "value": "Skype"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 147
+      },
+      "hiddenSeries": false,
+      "id": 144,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Skype",
+          "value": "Skype"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 154
       },
-      "id": 45,
+      "id": 145,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -1635,9 +4507,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 57
+        "y": 155
       },
-      "id": 46,
+      "id": 146,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -1651,7 +4523,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1663,7 +4535,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -1693,10 +4565,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 57
+        "y": 155
       },
       "hiddenSeries": false,
-      "id": 47,
+      "id": 147,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1718,7 +4590,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1734,7 +4606,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -1803,18 +4675,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 162
+      },
+      "id": 148,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Virgin",
+          "value": "Virgin"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 162
+      },
+      "hiddenSeries": false,
+      "id": 149,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Virgin",
+          "value": "Virgin"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 169
+      },
+      "id": 150,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Virgin",
+          "value": "Virgin"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 169
+      },
+      "hiddenSeries": false,
+      "id": 151,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Virgin",
+          "value": "Virgin"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 176
       },
-      "id": 48,
+      "id": 152,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -1859,9 +5143,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 65
+        "y": 177
       },
-      "id": 49,
+      "id": 153,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -1875,7 +5159,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1887,7 +5171,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -1917,10 +5201,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 65
+        "y": 177
       },
       "hiddenSeries": false,
-      "id": 50,
+      "id": 154,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1942,7 +5226,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1958,7 +5242,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -2027,18 +5311,430 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 184
+      },
+      "id": 155,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "YouTube",
+          "value": "YouTube"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 184
+      },
+      "hiddenSeries": false,
+      "id": 156,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "YouTube",
+          "value": "YouTube"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 191
+      },
+      "id": 157,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "YouTube",
+          "value": "YouTube"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 191
+      },
+      "hiddenSeries": false,
+      "id": 158,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "YouTube",
+          "value": "YouTube"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 198
       },
-      "id": 51,
+      "id": 159,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 26,
       "scopedVars": {
         "Service": {
@@ -2083,9 +5779,9 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 73
+        "y": 199
       },
-      "id": 52,
+      "id": 160,
       "options": {
         "displayMode": "gradient",
         "orientation": "horizontal",
@@ -2099,7 +5795,7 @@
         "showUnfilled": true
       },
       "pluginVersion": "7.0.5",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2111,7 +5807,7 @@
       },
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -2141,10 +5837,10 @@
         "h": 7,
         "w": 15,
         "x": 9,
-        "y": 73
+        "y": 199
       },
       "hiddenSeries": false,
-      "id": 53,
+      "id": 161,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -2166,7 +5862,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeatIteration": 1602172491684,
+      "repeatIteration": 1612874256756,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2182,7 +5878,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "scrape_duration_seconds{service=\"$Service\"}",
+          "expr": "scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -2242,6 +5938,418 @@
           "logBase": 1,
           "max": null,
           "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 206
+      },
+      "id": 162,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 55,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Zoom",
+          "value": "Zoom"
+        }
+      },
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TCP Jitter",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 206
+      },
+      "hiddenSeries": false,
+      "id": 163,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Zoom",
+          "value": "Zoom"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(scrape_duration_seconds{service=\"$Service\",job=\"blackbox-tcp\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Jitter History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 213
+      },
+      "id": 164,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.0.5",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 101,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Zoom",
+          "value": "Zoom"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{instance}} Jitter",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ICMP Round trip time",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 213
+      },
+      "hiddenSeries": false,
+      "id": 165,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatIteration": 1612874256756,
+      "repeatPanelId": 102,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "Service": {
+          "selected": false,
+          "text": "Zoom",
+          "value": "Zoom"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:155",
+          "alias": "/Packet Loss.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(probe_icmp_duration_seconds{phase=\"rtt\", service=\"$Service\"}) by (instance)",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "expr": "1-avg_over_time(probe_success{service=\"$Service\",job=\"blackbox-icmp\"}[$__interval])!=0 or null",
+          "interval": "",
+          "legendFormat": "Packet Loss {{instance}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:297",
+          "colorMode": "warning",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.01,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:303",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.05,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP Round trip time History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:604",
+          "format": "s",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:605",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
           "show": true
         }
       ],
@@ -2251,7 +6359,7 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": false,
   "schemaVersion": 25,
   "style": "dark",
   "tags": [],
@@ -2345,8 +6453,8 @@
     ]
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2021-02-09T12:39:13.799Z",
+    "to": "2021-02-09T12:49:13.799Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2364,5 +6472,5 @@
   "timezone": "",
   "title": "Network Latency",
   "uid": "K90IHTzgk",
-  "version": 5
+  "version": 2
 }

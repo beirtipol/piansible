@@ -3,7 +3,7 @@
   copy:
     src: checkAndRenewIPAddress.sh
     dest: /usr/local/bin/checkAndRenewIPAddress.sh
-    mode: 777
+    mode: '777'
 # There is some weird issue when running Docker Swarm nodes on a RaspberryPi
 # The IPv4 address seems to "disappear" every 24 hours or so. It can be restored with this command
 # See more reports here: https://bugs.launchpad.net/ubuntu/+source/avahi/+bug/1586528

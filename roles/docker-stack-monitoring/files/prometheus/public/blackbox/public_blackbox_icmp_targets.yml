@@ -1,0 +1,34 @@
+- targets:
+    - 1.1.1.1
+  labels:
+    service: CloudFare
+- targets:
+    - youtube.com
+  labels:
+    service: YouTube
+- targets:
+    - prod.http1.eu-west-1.prodaa.netflix.com
+    - ipv4-c022-lhr001-virginmedia-isp.1.oca.nflxvideo.net
+  labels:
+    service: Netflix
+- targets:
+    - amazon.co.uk
+  labels:
+    service: Amazon
+- targets:
+    - google.com
+    - 8.8.8.8
+  labels:
+    service: Google
+- targets:
+    - 194.168.4.100
+  labels: 
+    service: Virgin
+- targets:
+    - microsoft.com
+  labels:
+    service: Skype
+- targets:
+    - zoom.us
+  labels:
+    service: Zoom

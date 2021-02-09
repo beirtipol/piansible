@@ -1,45 +1,57 @@
+- name: Fix permissions for prometheus mnt folder
+  file:
+    path: /share/data/prometheus
+    group: nogroup
+    recurse: yes
+  become: yes
+
 - name: Deploy Templated Prometheus Configuration
   template:
     src: prometheus/prometheus.yml
     dest: /share/data/prometheus/prometheus.yml
-    mode: 666
+    mode: '666'
 
 - name: Deploy public Prometheus Configuration
   copy:
-    src: prometheus/public
+    src: prometheus/public/{{item}}
     dest: /share/data/prometheus
-    mode: 666
+    mode: '666'
+  loop:
+  - blackbox
 
 - name: Deploy private Prometheus Configuration
   copy:
-    src: prometheus/private
+    src: prometheus/private/{{item}}
     dest: /share/data/prometheus
-    mode: 666
+    mode: '666'
     decrypt: yes
+  loop:
+  - blackbox
+  - external
 
 - name: Deploy Grafana Configuration and Provisioning
   copy:
     src: grafana
     dest: /share/data
-    mode: 666
+    mode: '666'
 
 - name: Deploy Templated Grafana Config file
   template:
     src: grafana/config.monitoring
     dest: /share/data/grafana/config.monitoring
-    mode: 666
+    mode: '666'
 
 - name: Deploy Node Exporter Configuration
   copy:
     src: node-exporter
     dest: /share/data/node-exporter
-    mode: 666
+    mode: '666'
 
 - name: Deploy Docker Compose file
   copy:
     src: monitoring
     dest: /share/config/monitoring
-    mode: 666
+    mode: '666'
 
 - name: Deploy monitoring stack
   docker_stack:

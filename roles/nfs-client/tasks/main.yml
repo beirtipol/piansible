@@ -2,7 +2,7 @@
   file:
     path: /share
     state: directory
-    mode: '0777'
+    mode: '777'
 
 - name: Mount NFS Master Share
   mount:

@@ -69,14 +69,32 @@ scrape_configs:
       type: 'A'
       port: 9243
 
-  - job_name: 'blackbox'
+  - job_name: 'blackbox-tcp'
     metrics_path: /probe
     params:
       module: [tcp_connect]
     
     file_sd_configs:
     - files:
-      - blackbox/*.yml
+      - blackbox/*tcp_targets.yml
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: prometheus-blackbox:9115
+
+  - job_name: 'blackbox-icmp'
+    metrics_path: /probe
+    params:
+      module: [icmp]
+    scrape_interval: 5s
+    
+    file_sd_configs:
+    - files:
+      - blackbox/*icmp_targets.yml
 
     relabel_configs:
       - source_labels: [__address__]

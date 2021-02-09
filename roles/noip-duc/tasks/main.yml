@@ -10,7 +10,7 @@
   file:
     path: /usr/local/src
     state: directory
-    mode: '0755'
+    mode: '755'
 
 - name: Download the NOIP Dynamic Update Client
   become: yes
@@ -18,7 +18,7 @@
     url: https://www.noip.com/client/linux/noip-duc-linux.tar.gz
     dest: /usr/local/src/noip-duc-linux.tar.gz
     checksum: md5:3b0f5f2ff8637c73ab337be403252a60
-    mode: '0600'
+    mode: '600'
 
 - name: Unpack the client
   become: yes
@@ -38,7 +38,7 @@
     remote_src: yes
     src: /usr/local/src/noip-2.1.9-1/noip2
     dest: /usr/local/bin/noip2
-    mode: 0755
+    mode: '755'
 
 - name: Create the NOIP configuration file
   become: yes
@@ -49,7 +49,7 @@
   copy:
     src: noip2.service
     dest: /etc/systemd/system/noip2.service
-    mode: 0600
+    mode: '600'
 
 - name: Start the NOIP client
   become: yes

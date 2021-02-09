@@ -12,5 +12,3 @@
         rm -f portainer-agent-stack.yml
   warn: false
   run_once: true
-
-
