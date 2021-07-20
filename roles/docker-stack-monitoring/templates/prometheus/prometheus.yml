@@ -73,6 +73,7 @@ scrape_configs:
     metrics_path: /probe
     params:
       module: [tcp_connect]
+    scrape_interval: 1s
     
     file_sd_configs:
     - files:
@@ -90,7 +91,7 @@ scrape_configs:
     metrics_path: /probe
     params:
       module: [icmp]
-    scrape_interval: 5s
+    scrape_interval: 1s
     
     file_sd_configs:
     - files:

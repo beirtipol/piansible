@@ -8,7 +8,6 @@
     service: YouTube
 - targets:
     - prod.http1.eu-west-1.prodaa.netflix.com
-    - ipv4-c022-lhr001-virginmedia-isp.1.oca.nflxvideo.net
   labels:
     service: Netflix
 - targets:
@@ -16,7 +15,7 @@
   labels:
     service: Amazon
 - targets:
-    - google.com
+    - google.co.uk
     - 8.8.8.8
   labels:
     service: Google
@@ -29,6 +28,6 @@
   labels:
     service: Skype
 - targets:
-    - zoom.us
+    - zoom.co.uk
   labels:
     service: Zoom

@@ -1,4 +1,4 @@
-from ubuntu
+FROM ubuntu
 
 RUN apt-get update && apt-get install python3 python3-pip dos2unix ansible sshpass nano -y
 
