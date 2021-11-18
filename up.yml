@@ -49,8 +49,9 @@
   roles:
     # - docker-stack-portainer
     - docker-stack-monitoring
-    # - docker-stack-jfixtools
+    - docker-stack-jfixtools
     # - docker-stack-nginx
+    # - docker-stack-wireguard
 
 # - name: Set up NOIP DUC
 #   hosts: swarm_manager

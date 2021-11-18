@@ -1,6 +1,6 @@
 - name: Deploy NGINX Data
   copy:
-    src: data
+    src: data/
     dest: /share/data/nginx
     mode: '666'
 

@@ -10,6 +10,7 @@ services:
       - nginx_data:/config
       - /share/data/nginx/proxy-confs/:/config/nginx/proxy-confs/
       - /share/data/nginx/dhparams.pem:/config/nginx/dhparams.pem
+      - /share/logs/nginx:/var/log/nginx
     deploy:
       mode: replicated
       placement:
@@ -22,7 +23,7 @@ services:
       - PUID=1001
       - PGID=1001
       - URL={{external_url}}
-      - SUBDOMAINS=www,grafana,home,fix
+      - SUBDOMAINS=www,grafana,home,fix,plex
       - VALIDATION=http
       - EMAIL={{my_email}}
       - TZ=Europe/London

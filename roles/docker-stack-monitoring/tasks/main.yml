@@ -41,12 +41,6 @@
     dest: /share/data/grafana/config.monitoring
     mode: '666'
 
-- name: Deploy Node Exporter Configuration
-  copy:
-    src: node-exporter
-    dest: /share/data/node-exporter
-    mode: '666'
-
 - name: Deploy Docker Compose file
   copy:
     src: monitoring
