@@ -43,8 +43,8 @@
 
 - name: Deploy Docker Compose file
   copy:
-    src: monitoring
-    dest: /share/config/monitoring
+    src: monitoring/docker-compose.yml
+    dest: /share/config/monitoring/docker-compose.yml
     mode: '666'
 
 - name: Deploy monitoring stack

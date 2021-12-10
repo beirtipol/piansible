@@ -8,15 +8,23 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1605446150967,
+  "iteration": 1638811960104,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "aliasColors": {},
@@ -27,23 +35,7 @@
       "decimals": 2,
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
@@ -72,10 +64,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.0.5",
+      "pluginVersion": "8.2.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -85,7 +77,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sensor_unit_gbp",
+          "exemplar": true,
+          "expr": "homeassistant_sensor_monetary_gbp",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -143,7 +136,7 @@
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -172,9 +165,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.2.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -184,7 +178,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "switch_state",
+          "exemplar": true,
+          "expr": "homeassistant_switch_state",
           "interval": "",
           "legendFormat": "{{friendly_name}}",
           "refId": "A"
@@ -241,23 +236,7 @@
       "decimals": 2,
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
@@ -286,10 +265,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.0.5",
+      "pluginVersion": "8.2.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -299,7 +278,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sensor_unit_kwh",
+          "exemplar": true,
+          "expr": "homeassistant_sensor_energy_kwh",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -356,21 +336,7 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
@@ -397,10 +363,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.0.5",
+      "pluginVersion": "8.2.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -410,10 +376,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(person_state)",
+          "exemplar": true,
+          "expr": "sum(homeassistant_person_state)",
           "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "People Home",
           "refId": "A"
         }
       ],
@@ -462,24 +429,159 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.2
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 11,
+        "x": 0,
+        "y": 18
+      },
+      "id": 42,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "homeassistant_sensor_battery_percent{entity=\"sensor.back_garden_battery\"}",
+          "interval": "",
+          "legendFormat": "{{friendly_name}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "homeassistant_sensor_battery_percent{entity=\"sensor.courtyard_battery\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{friendly_name}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "homeassistant_sensor_battery_percent{entity=\"sensor.doorbell_battery\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{friendly_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Camera Battery",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 3
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 13,
+        "x": 11,
+        "y": 18
+      },
+      "id": 58,
+      "interval": "24h",
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg_over_time(homeassistant_climate_action{action=\"heating\"}[$__interval])*24",
+          "interval": "",
+          "legendFormat": "{{friendly_name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Time spent Heating past 24h",
+      "type": "bargauge"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 10,
       "panels": [],
       "repeat": "NetatmoRoom",
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Green Room",
-          "value": "Netatmo Green Room"
-        }
-      },
       "title": "$NetatmoRoom",
       "type": "row"
     },
@@ -491,7 +593,7 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -499,9 +601,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 9,
-        "w": 12,
+        "w": 24,
         "x": 0,
-        "y": 19
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 2,
@@ -520,987 +622,49 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.2.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Green Room",
-          "value": "Netatmo Green Room"
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:81",
+          "alias": "/.* Heating/",
+          "bars": true,
+          "color": "#FF7383",
+          "legend": false,
+          "lines": false,
+          "yaxis": 2
         }
-      },
-      "seriesOverrides": [],
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
+          "exemplar": true,
+          "expr": "homeassistant_climate_current_temperature_celsius{friendly_name=\"$NetatmoRoom\"}",
           "interval": "",
           "legendFormat": "{{friendly_name}} Temperature",
           "refId": "A"
         },
         {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
+          "exemplar": true,
+          "expr": "homeassistant_climate_target_temperature_celsius{friendly_name=\"$NetatmoRoom\"}",
           "interval": "",
           "legendFormat": "{{friendly_name}} Setpoint",
           "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 28
-      },
-      "id": 11,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Hall",
-          "value": "Netatmo Hall"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 29
-      },
-      "hiddenSeries": false,
-      "id": 12,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Hall",
-          "value": "Netatmo Hall"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
+          "exemplar": true,
+          "expr": "homeassistant_climate_action{friendly_name=\"$NetatmoRoom\", action=\"heating\"}",
+          "hide": false,
           "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 38
-      },
-      "id": 13,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Jacks Room",
-          "value": "Netatmo Jacks Room"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 39
-      },
-      "hiddenSeries": false,
-      "id": 14,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Jacks Room",
-          "value": "Netatmo Jacks Room"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 48
-      },
-      "id": 15,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Kitchen",
-          "value": "Netatmo Kitchen"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 49
-      },
-      "hiddenSeries": false,
-      "id": 16,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Kitchen",
-          "value": "Netatmo Kitchen"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 58
-      },
-      "id": 17,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Living room",
-          "value": "Netatmo Living room"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 59
-      },
-      "hiddenSeries": false,
-      "id": 18,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Living room",
-          "value": "Netatmo Living room"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 68
-      },
-      "id": 19,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Office",
-          "value": "Netatmo Office"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 69
-      },
-      "hiddenSeries": false,
-      "id": 20,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Office",
-          "value": "Netatmo Office"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 78
-      },
-      "id": 21,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Our Bedroom",
-          "value": "Netatmo Our Bedroom"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 79
-      },
-      "hiddenSeries": false,
-      "id": 22,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Our Bedroom",
-          "value": "Netatmo Our Bedroom"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Room Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 88
-      },
-      "id": 23,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 10,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Upstairs Hall",
-          "value": "Netatmo Upstairs Hall"
-        }
-      },
-      "title": "$NetatmoRoom",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 89
-      },
-      "hiddenSeries": false,
-      "id": 24,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1605446150967,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "NetatmoRoom": {
-          "selected": false,
-          "text": "Netatmo Upstairs Hall",
-          "value": "Netatmo Upstairs Hall"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "current_temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "temperature_c{friendly_name=\"$NetatmoRoom\"}",
-          "interval": "",
-          "legendFormat": "{{friendly_name}} Setpoint",
-          "refId": "B"
+          "legendFormat": "{{friendly_name}} Heating",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -1545,7 +709,8 @@
       }
     }
   ],
-  "schemaVersion": 25,
+  "refresh": false,
+  "schemaVersion": 32,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1554,73 +719,32 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
-          "text": "All",
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
         },
         "datasource": "Prometheus",
-        "definition": "label_values(temperature_c, friendly_name)",
+        "definition": "label_values(homeassistant_climate_current_temperature_celsius, friendly_name)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Netatmo Room",
         "multi": true,
         "name": "NetatmoRoom",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Green Room",
-            "value": "Netatmo Green Room"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Hall",
-            "value": "Netatmo Hall"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Jacks Room",
-            "value": "Netatmo Jacks Room"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Kitchen",
-            "value": "Netatmo Kitchen"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Living room",
-            "value": "Netatmo Living room"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Office",
-            "value": "Netatmo Office"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Our Bedroom",
-            "value": "Netatmo Our Bedroom"
-          },
-          {
-            "selected": false,
-            "text": "Netatmo Upstairs Hall",
-            "value": "Netatmo Upstairs Hall"
-          }
-        ],
-        "query": "label_values(temperature_c, friendly_name)",
-        "refresh": 0,
+        "options": [],
+        "query": {
+          "query": "label_values(homeassistant_climate_current_temperature_celsius, friendly_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -1628,7 +752,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1647,5 +771,5 @@
   "timezone": "",
   "title": "Energy Usage",
   "uid": "KvZvn4WRz",
-  "version": 2
+  "version": 11
 }

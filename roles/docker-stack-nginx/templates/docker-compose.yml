@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 volumes:
   nginx_data: {}
@@ -10,15 +10,22 @@ services:
       - nginx_data:/config
       - /share/data/nginx/proxy-confs/:/config/nginx/proxy-confs/
       - /share/data/nginx/dhparams.pem:/config/nginx/dhparams.pem
-      - /share/logs/nginx:/var/log/nginx
+      - /share/data/nginx/nginx.conf:/config/nginx/nginx.conf
+      - /var/log/nginx:/config/log/nginx
     deploy:
       mode: replicated
       placement:
         constraints:
           - "node.role==manager"
     ports:
-      - 80:80
-      - 443:443
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
     environment:
       - PUID=1001
       - PGID=1001

@@ -10,6 +10,12 @@
     dest: /share/config/nginx/docker-compose.yml
     mode: '666'
 
+- name: Create log directory if it does not exist
+  file:
+    path: /var/log/nginx/
+    state: directory
+    mode: '777'
+
 - name: Deploy NGINX stack
   docker_stack:
     state: present

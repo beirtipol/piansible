@@ -1,0 +1,18 @@
+loki:
+  host: loki
+  port:
+    http: 3100
+    grpc: 9096
+
+promtail:
+  port: 
+    http: 9080
+    grpc: 0
+
+prometheus:
+  port:
+    http: 9090
+
+elasticsearch:
+  urls:
+    ingest: es01:9200

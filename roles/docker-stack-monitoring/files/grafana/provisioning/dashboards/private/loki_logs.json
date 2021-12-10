@@ -1,0 +1,127 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 19,
+    "iteration": 1639126529196,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": "Loki",
+        "gridPos": {
+          "h": 29,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "expr": "{filename=\"$filename\", host=\"$host\"}",
+            "refId": "A"
+          }
+        ],
+        "title": "Log Viewer",
+        "type": "logs"
+      }
+    ],
+    "schemaVersion": 32,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "pinode01",
+            "value": "pinode01"
+          },
+          "datasource": "Loki",
+          "definition": "label_values(host)",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "host",
+          "options": [],
+          "query": "label_values(host)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": true,
+            "text": [
+              "/var/host_log/daemon.log"
+            ],
+            "value": [
+              "/var/host_log/daemon.log"
+            ]
+          },
+          "datasource": "Loki",
+          "definition": "label_values(filename)",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "filename",
+          "options": [],
+          "query": "label_values(filename)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Loki Logs",
+    "uid": "VQE7znkgz",
+    "version": 4
+  }

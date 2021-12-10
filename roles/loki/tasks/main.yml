@@ -1,0 +1,18 @@
+- name: Create Loki directory if it does not exist
+  file:
+    path: /etc/loki/
+    state: directory
+    mode: '777'
+
+- name: Fix permissions for Loki mnt folder
+  file:
+    path: /etc/loki/
+    group: nogroup
+    recurse: yes
+  become: yes
+
+- name: Deploy Templated Loki Config file
+  template:
+    src: local-config.yaml
+    dest: /etc/loki/local-config.yaml
+    mode: '666'

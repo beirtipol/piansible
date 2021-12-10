@@ -4,6 +4,7 @@ version: '3'
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    loki_data: {}
 
 networks:
   front-tier:
@@ -31,6 +32,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-admin-api'
       - '--web.enable-lifecycle'
+      - '--storage.tsdb.retention.size=2GB'
     deploy:
       placement:
         constraints:
@@ -133,7 +135,7 @@ services:
 
   # Grafana is a visualisation tool that can use Prometheus and other datasources for viewing metrics
   grafana:
-    image: grafana/grafana:7.0.5
+    image: grafana/grafana:8.2.5
     depends_on:
       - prometheus
     ports:
@@ -154,3 +156,35 @@ services:
           - node.role==manager
       restart_policy:
         condition: on-failure
+
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - 3100:3100
+    volumes:
+      - loki_data:/loki
+      - /etc/loki/:/etc/loki/
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - back-tier
+    deploy:
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+  promtail:
+    image: grafana/promtail:2.3.0
+    ports:
+      - 9080:9080
+    volumes:
+      - /etc/promtail/:/etc/promtail/
+      - /var/log:/var/host_log
+    command: -config.file=/etc/promtail/promtail-docker-config.yaml
+    networks:
+      - back-tier
+    deploy:
+      mode: global
+      restart_policy:
+          condition: on-failure
